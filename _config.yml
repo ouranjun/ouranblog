@@ -3,23 +3,24 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 偶然 blog
+title: Ouran's blog
 subtitle: ''
-description: ''
-keywords:
-author: 偶然
-language: en
+description: '前端小哥日常备忘录'
+keywords: 'blog,博客,hexo,Hexo'
+author: '偶然'
+language: zh-CN
 timezone: ''
+avatar: https://7bu.top/2020/07/29/9af6a919201b1.jpeg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://ouranjun.cn
 root: /
-permalink: :year/:month/:day/:title/
+permalink: /post/:title/
 permalink_defaults:
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: false # Set to false to remove trailing '.html' from permalinks
 
 # Directory
 source_dir: source
@@ -37,7 +38,7 @@ default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
-  field: site # Apply to the whole site
+  field: post # Apply to the whole site
   exclude: ''
 filename_case: 0
 render_drafts: false
@@ -99,3 +100,23 @@ theme: volantis
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: ''
+
+# offline config passed to sw-precache.
+service_worker:
+  maximumFileSizeToCacheInBytes: 5242880
+  staticFileGlobs:
+  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  stripPrefix: public
+  verbose: false
+  runtimeCaching:
+    - urlPattern: /*  # 子路径（接受通配符）
+      handler: cacheFirst
+      options:
+        origin: unpkg.com  # 域名
+    - urlPattern: /npm/*   # 子路径（接受通配符）
+      handler: cacheFirst
+      options:
+        origin: cdn.jsdelivr.net  # 域名
+
+# 网站图标，更多尺寸等图标请使用import方式批量导入
+favicon: https://7bu.top/2020/07/29/9af6a919201b1.jpeg
